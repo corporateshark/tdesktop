@@ -815,21 +815,11 @@ QSize OverlayWidget::flipSizeByRotation(QSize size) const {
 }
 
 bool OverlayWidget::hasCopyMediaRestriction() const {
-	return (_history && !_history->peer->allowsForwarding())
-		|| (_message && _message->forbidsSaving());
+	return false;
 }
 
 bool OverlayWidget::showCopyMediaRestriction() {
-	if (!hasCopyMediaRestriction()) {
-		return false;
-	}
-	Ui::ShowMultilineToast({
-		.parentOverride = _widget,
-		.text = { _history->peer->isBroadcast()
-			? tr::lng_error_nocopy_channel(tr::now)
-			: tr::lng_error_nocopy_group(tr::now) },
-	});
-	return true;
+	return false;
 }
 
 bool OverlayWidget::videoShown() const {
