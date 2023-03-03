@@ -69,3 +69,7 @@ set(desktop_app_skip_libs
 
 add_subdirectory(cmake)
 add_subdirectory(Telegram)
+
+# Qt finds a local installation of Vulkan SDK and wants to link against it
+target_link_libraries(codegen_emoji PRIVATE ${libs_loc}/Qt-5.15.8/lib/Qt5VulkanSupport.lib)
+target_link_libraries(Telegram      PRIVATE ${libs_loc}/Qt-5.15.8/lib/Qt5VulkanSupport.lib)
