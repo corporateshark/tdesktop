@@ -1443,7 +1443,7 @@ void HistoryItem::applyEdition(HistoryMessageEdition &&edition) {
 		}
 	}
 
-	applyTTL(edition.ttl);
+//	applyTTL(edition.ttl);
 
 	finishEdition(keyboardTop);
 }

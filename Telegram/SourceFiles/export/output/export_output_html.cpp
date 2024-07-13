@@ -1355,7 +1355,7 @@ QByteArray HtmlWriter::Wrap::pushMedia(
 	}
 	const auto &content = message.media.content;
 	if (const auto document = std::get_if<Data::Document>(&content)) {
-		Assert(!message.media.ttl);
+//		Assert(!message.media.ttl);
 		if (document->isSticker) {
 			return pushStickerMedia(*document, basePath);
 		} else if (document->isAnimated) {
@@ -1365,7 +1365,7 @@ QByteArray HtmlWriter::Wrap::pushMedia(
 		}
 		Unexpected("Non generic document in HtmlWriter::Wrap::pushMedia.");
 	} else if (const auto photo = std::get_if<Data::Photo>(&content)) {
-		Assert(!message.media.ttl);
+//		Assert(!message.media.ttl);
 		return pushPhotoMedia(*photo, basePath);
 	} else if (const auto poll = std::get_if<Data::Poll>(&content)) {
 		return pushPoll(*poll);
@@ -1726,24 +1726,24 @@ MediaData HtmlWriter::Wrap::prepareMediaData(
 	}
 
 	v::match(message.media.content, [&](const Photo &data) {
-		if (message.media.ttl) {
-			result.title = "Self-destructing photo";
-			result.status = data.id
-				? "Please view it on your mobile"
-				: "Expired";
-			result.classes = "media_photo";
-			return;
-		}
+//		if (message.media.ttl) {
+//			result.title = "Self-destructing photo";
+//			result.status = data.id
+//				? "Please view it on your mobile"
+//				: "Expired";
+//			result.classes = "media_photo";
+//			return;
+//		}
 		// At least try to pushPhotoMedia.
 	}, [&](const Document &data) {
-		if (message.media.ttl) {
-			result.title = "Self-destructing video";
-			result.status = data.id
-				? "Please view it on your mobile"
-				: "Expired";
-			result.classes = "media_video";
-			return;
-		}
+//		if (message.media.ttl) {
+//			result.title = "Self-destructing video";
+//			result.status = data.id
+//				? "Please view it on your mobile"
+//				: "Expired";
+//			result.classes = "media_video";
+//			return;
+//		}
 		const auto hasFile = !data.file.relativePath.isEmpty();
 		result.link = data.file.relativePath;
 		result.description = NoFileDescription(data.file.skipReason);
@@ -1794,7 +1794,7 @@ MediaData HtmlWriter::Wrap::prepareMediaData(
 			result.link = data.vcard.relativePath;
 		}
 	}, [&](const GeoPoint &data) {
-		if (message.media.ttl) {
+		if (message.media.ttl && false) {
 			result.classes = "media_live_location";
 			result.title = "Live location";
 			result.status = "";

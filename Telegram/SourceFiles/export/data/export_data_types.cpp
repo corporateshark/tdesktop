@@ -919,7 +919,7 @@ Media ParseMedia(
 				+ PreparePhotoFileName(++context.photos, date))
 			: Photo();
 		if (const auto ttl = data.vttl_seconds()) {
-			result.ttl = ttl->v;
+//			result.ttl = ttl->v;
 			content.image.file = File();
 		}
 		result.content = content;
@@ -935,7 +935,7 @@ Media ParseMedia(
 			? ParseDocument(context, *document, folder, date)
 			: Document();
 		if (const auto ttl = data.vttl_seconds()) {
-			result.ttl = ttl->v;
+//			result.ttl = ttl->v;
 			content.file = File();
 		}
 		result.content = content;
@@ -949,7 +949,7 @@ Media ParseMedia(
 		result.content = ParseInvoice(data);
 	}, [&](const MTPDmessageMediaGeoLive &data) {
 		result.content = ParseGeoPoint(data.vgeo());
-		result.ttl = data.vperiod().v;
+//		result.ttl = data.vperiod().v;
 	}, [&](const MTPDmessageMediaPoll &data) {
 		result.content = ParsePoll(data);
 	}, [](const MTPDmessageMediaDice &data) {
